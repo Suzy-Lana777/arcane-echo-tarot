@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arcane Echo Tarot</title>
+    
+    <!-- Підключаємо стилі (спочатку скидання, потім основні) -->
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>Arcane Echo Tarot</h1>
+        <p>Отримай своє передбачення на сьогодні</p>
+    </header>
+
+    <main>
+        <!-- Контейнер, куди JS буде "малювати" карту -->
+        <div id="card-container" class="scene">
+            <div class="card" id="tarot-card">
+                <!-- Тут буде динамічний контент -->
+                <div class="card__face card__face--front">
+                    <img src="img/back.jpg" alt="Сорочка карти">
+                </div>
+                <div class="card__face card__face--back">
+                    <!-- Сюди JS підставить картинку витягнутої карти -->
+                </div>
+            </div>
+        </div>
+
+        <button id="draw-btn">Витягнути карту</button>
+        
+        <div id="description-container">
+            <h2 id="card-name"></h2>
+            <p id="card-text"></p>
+        </div>
+    </main>
+
+    <!-- Підключаємо JavaScript як модуль -->
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
