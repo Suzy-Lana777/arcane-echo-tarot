@@ -1,26 +1,29 @@
 import { tarotDeck } from './data.js';
 
+// Знаходимо всі потрібні елементи на сторінці
+const drawBtn = document.getElementById('draw-btn');
 const cardBackFace = document.querySelector('.card__face--back');
+const cardName = document.getElementById('card-name');
+const cardText = document.getElementById('card-text');
 
-if (cardBackFace) {
-  const card = tarotDeck[0];
+// Перевіряємо, чи кнопка взагалі існує на сторінці
+if (drawBtn) {
+  drawBtn.addEventListener('click', () => {
+    // 1. Вибираємо випадковий індекс із масиву карт
+    const randomIndex = Math.floor(Math.random() * tarotDeck.length);
+    const randomCard = tarotDeck[randomIndex];
 
-  // Створюємо картинку через об'єкт Image, щоб відстежити помилку
-  const img = new Image();
-  img.src = card.image;
-  img.alt = card.name;
+    // 2. Вставляємо картинку карти
+    if (cardBackFace) {
+      cardBackFace.innerHTML = `<img src="${randomCard.image}" alt="${randomCard.name}">`;
+    }
 
-  img.onload = () => {
-    cardBackFace.innerHTML = '';
-    cardBackFace.appendChild(img);
-    console.log('Зображення успішно завантажено');
-  };
+    // 3. Виводимо текст під картою
+    if (cardName) cardName.textContent = randomCard.name;
+    if (cardText) cardText.textContent = randomCard.description;
 
-  img.onerror = () => {
-    console.error('Помилка завантаження картинки за адресою:', card.image);
-    // Якщо Вікіпедія блокує запит, спробуємо інше стабільне джерело
-    cardBackFace.innerHTML = `<p style="padding: 20px;">Не вдалося завантажити фото. Спробуйте оновити сторінку.</p>`;
-  };
+    console.log(`Витягнуто карту: ${randomCard.name}`);
+  });
 } else {
-  console.error('Не знайдено елемент .card__face--back');
+  console.error('Кнопку з id="draw-btn" не знайдено в HTML!');
 }

@@ -29,7 +29,7 @@ h1 {
 .scene {
   width: 250px;
   height: 400px;
-  perspective: 1000px; /* Потрібно для майбутнього ефекту перевороту */
+  perspective: 1000px;
   margin-bottom: 30px;
 }
 
@@ -46,7 +46,7 @@ h1 {
   position: absolute;
   width: 100%;
   height: 100%;
-  backface-visibility: hidden; /* Ховає зворотну сторону при перевороті */
+  /* Тимчасово прибрали backface-visibility, щоб браузер не ховав карту */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -60,21 +60,26 @@ h1 {
 /* Передня сторона (сорочка) */
 .card__face--front {
   background-color: #2c3e50;
+  /* Тимчасово ховаємо сорочку, щоб вона не перекривала нашу картинку, яка з'являється по кнопці */
+  display: none;
 }
 
-/* Задня сторона (де з'являється Маг) */
+/* Задня сторона (де з'являється Маг/Дурень) */
 .card__face--back {
   background-color: #fff;
-  /* Тимчасово змушуємо її бути видимою, поки не налаштували перевороти */
-  transform: rotateY(0deg);
+  position: relative;
+  z-index: 2; /* Виштовхуємо цю сторону на передній план, щоб бачити картинку */
 }
 
+/* Стилі для зображення всередині карти */
 /* Стилі для зображення всередині карти */
 .card__face img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Картинка заповнює всю карту */
-  display: block;
+  object-fit: contain; /* Картинка буде масштабуватися без спотворень */
+  position: absolute; /* Стає чітко поверх білого фону */
+  top: 0;
+  left: 0;
 }
 
 /* 4. Кнопка */
